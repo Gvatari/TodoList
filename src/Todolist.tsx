@@ -6,15 +6,15 @@ import { TodoListButtonGroup } from "./components/TodoListButtonGroup";
 import { filteredTasksType } from "./App";
 
 export type TasksType = {
-    id: number
+    id: string
     isDone: boolean
     name: string
 }
 
 type PropsTypeTodolist = {
     title: string
-    tasks: Array<TasksType>
-    removeTask: (id: number) => void
+    tasks: TasksType[]
+    removeTask: (id: string) => void
     changeFilterTasks: (filteredTasks: filteredTasksType) => void
 }
 
