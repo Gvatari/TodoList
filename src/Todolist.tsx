@@ -15,14 +15,15 @@ type PropsTypeTodolist = {
     title: string
     tasks: TasksType[]
     removeTask: (id: string) => void
+    addTask: (valueInput: string) => void
     changeFilterTasks: (filteredTasks: filteredTasksType) => void
 }
 
-export const Todolist: FC<PropsTypeTodolist> = ({ title, tasks, removeTask, changeFilterTasks }) => {
+export const Todolist: FC<PropsTypeTodolist> = ({ title, tasks, removeTask, addTask, changeFilterTasks }) => {
     return (
         <div className='todoList'>
             <Title title={title} />
-            <AddTask />
+            <AddTask addTask={addTask} />
             <TasksItems removeTask={removeTask} tasks={tasks} />
             <TodoListButtonGroup changeFilterTasks={changeFilterTasks} />
         </div>

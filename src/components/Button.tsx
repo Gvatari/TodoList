@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 type propsTypeButton = {
     title: string
-    onClick?: () => void;
+    onClick: () => void;
 }
 
 export const Button: FC<propsTypeButton> = ({ title, onClick }) => {

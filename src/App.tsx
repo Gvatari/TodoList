@@ -18,6 +18,12 @@ const App = () => {
         setTasks(newTasks);
     }
 
+    const addTask = (valueInput: string) => {
+        let newTask = {id: v1(), isDone: false, name: valueInput}
+        const newTasks = [newTask, ...tasks]
+        setTasks(newTasks)
+    }
+
     const [filteredTasks, SetFilteredTasks] = useState<filteredTasksType>('All');
 
     const filteringTasks: TasksType[] = filteredTasks === 'Active' ?
@@ -33,6 +39,7 @@ const App = () => {
             <Todolist title='What to learn'
                 changeFilterTasks={changeFilterTasks}
                 removeTask={removeTask}
+                addTask={addTask}
                 tasks={filteringTasks}
             />
         </div>

@@ -7,6 +7,7 @@ type TodoListButtonGroupPropsType = {
 }
 
 export const TodoListButtonGroup: FC<TodoListButtonGroupPropsType> = ({changeFilterTasks}) => {
+    
     return (
         <div>
             <Button onClick={() => changeFilterTasks('All')} title='All' />

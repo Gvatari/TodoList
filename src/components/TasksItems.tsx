@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { TasksType } from '../Todolist';
+import { Button } from './Button';
 
 type PropsTypeTasksItems = {
     tasks: TasksType[]
@@ -9,12 +10,19 @@ type PropsTypeTasksItems = {
 export const TasksItems: FC<PropsTypeTasksItems> = ({ tasks, removeTask }) => {
 
     const tasksMap = () => {
-       return tasks.map(t =>
-            <li key={t.id}>
-                <input type="checkbox" checked={t.isDone} />
-                <span>{t.name}</span>
-                <button onClick={() => { removeTask(t.id) }}>x</button>
-            </li>
+        return (
+            tasks.map(t => {
+                const removeTaskHandler = () => {
+                    removeTask(t.id)
+                }
+                return (
+                    <li key={t.id}>
+                        <input type="checkbox" checked={t.isDone} />
+                        <span>{t.name}</span>
+                        <Button onClick={removeTaskHandler} title={'x'} />
+                    </li>
+                )
+            })
         )
     }
 
@@ -24,8 +32,8 @@ export const TasksItems: FC<PropsTypeTasksItems> = ({ tasks, removeTask }) => {
                 tasks.length ?
                     <ul>
                         {tasksMap()}
-                    </ul>
-                    : <span>Task list is empty</span>
+                    </ul> :
+                    <span>Task list is empty</span>
             }
         </>
     );
