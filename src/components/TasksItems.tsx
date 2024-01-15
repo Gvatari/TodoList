@@ -12,9 +12,8 @@ export const TasksItems: FC<PropsTypeTasksItems> = ({ tasks, removeTask }) => {
     const tasksMap = () => {
         return (
             tasks.map(t => {
-                const removeTaskHandler = () => {
-                    removeTask(t.id)
-                }
+                const removeTaskHandler = () => removeTask(t.id)
+                
                 return (
                     <li key={t.id}>
                         <input type="checkbox" checked={t.isDone} />

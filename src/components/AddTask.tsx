@@ -15,11 +15,11 @@ export const AddTask: FC<PropsTypeAddTask> = ({ addTask }) => {
     }
 
     const onChangeHandlerInput = (e: ChangeEvent<HTMLInputElement>) => {
-        setValueInput(e.target.value)
+        setValueInput(e.currentTarget.value)
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') eventAddTask()
+        e.key === 'Enter' && valueInput.length && eventAddTask()
     }
 
     const onClickHandler = () => {
@@ -36,6 +36,7 @@ export const AddTask: FC<PropsTypeAddTask> = ({ addTask }) => {
             <Button
                 onClick={onClickHandler}
                 title='+'
+                isDisabled={!valueInput}
             />
         </div>
     );

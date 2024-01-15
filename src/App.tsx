@@ -11,7 +11,7 @@ const App = () => {
         { id: v1(), isDone: true, name: 'HTML&CSS' },
         { id: v1(), isDone: true, name: 'JS' },
         { id: v1(), isDone: false, name: 'React' }
-    ])    
+    ])
 
     const removeTask = (id: string) => {
         const newTasks: TasksType[] = tasks.filter(task => task.id !== id);
@@ -19,9 +19,8 @@ const App = () => {
     }
 
     const addTask = (valueInput: string) => {
-        let newTask = {id: v1(), isDone: false, name: valueInput}
-        const newTasks = [newTask, ...tasks]
-        setTasks(newTasks)
+        let newTask = { id: v1(), isDone: false, name: valueInput }
+        setTasks([newTask, ...tasks])
     }
 
     const [filteredTasks, SetFilteredTasks] = useState<filteredTasksType>('All');

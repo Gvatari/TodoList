@@ -7,12 +7,16 @@ type TodoListButtonGroupPropsType = {
 }
 
 export const TodoListButtonGroup: FC<TodoListButtonGroupPropsType> = ({changeFilterTasks}) => {
-    
+
+    const changeFilterHandlerCreator = (filter: filteredTasksType) => {
+        return () => changeFilterTasks(filter)
+    }
+
     return (
         <div>
-            <Button onClick={() => changeFilterTasks('All')} title='All' />
-            <Button onClick={() => changeFilterTasks('Active')} title='Active' />
-            <Button onClick={() => changeFilterTasks('Completed')} title='Completed' />
+            <Button onClick={changeFilterHandlerCreator("All")} title='All' />
+            <Button onClick={changeFilterHandlerCreator('Active')} title='Active' />
+            <Button onClick={changeFilterHandlerCreator('Completed')} title='Completed' />
         </div>
     );
 };
