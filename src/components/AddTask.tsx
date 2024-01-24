@@ -1,5 +1,6 @@
 import { ChangeEvent, KeyboardEvent, FC, useState } from 'react';
 import { Button } from './Button';
+import { v1 } from 'uuid';
 
 type PropsTypeAddTask = {
     addTask: (valueInput: string) => void
@@ -8,9 +9,10 @@ type PropsTypeAddTask = {
 export const AddTask: FC<PropsTypeAddTask> = ({ addTask }) => {
 
     const [valueInput, setValueInput] = useState<string>('');
+    const [errorClass, setErrorClass] = useState<boolean>(false)
 
     const eventAddTask = () => {
-        addTask(valueInput)
+        addTask(valueInput.trim())
         setValueInput('')
     }
 
@@ -19,25 +21,35 @@ export const AddTask: FC<PropsTypeAddTask> = ({ addTask }) => {
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        e.key === 'Enter' && valueInput.length && eventAddTask()
+        console.log(valueInput.length);
+        
+        e.key === 'Enter' && valueInput.trim().length && eventAddTask()
+        errorClassName()
     }
 
     const onClickHandler = () => {
         eventAddTask()
     }
 
+    const errorClassName = () => {
+        valueInput.trim().length === 0 ? setErrorClass(true) : setErrorClass(false)   
+    }
+
     return (
         <div>
             <input
-                onKeyDown={onKeyDownHandler}
+                className={`add-task-input ${errorClass ? 'error' : ''}`}
+                id={v1()}
+                onKeyUp={onKeyDownHandler}
                 value={valueInput}
                 onChange={onChangeHandlerInput}
             />
             <Button
                 onClick={onClickHandler}
                 title='+'
-                isDisabled={!valueInput}
+                isDisabled={!valueInput.trim()}
             />
+            {errorClass ? <div style={{ color: 'red' }}>Строка не должна быть пустой</div> : null}
         </div>
     );
 };
