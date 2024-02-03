@@ -3,16 +3,17 @@ import { Button } from './Button';
 import { v1 } from 'uuid';
 
 type PropsTypeAddTask = {
-    addTask: (valueInput: string) => void
+    addTask: (todoListId: string, valueInput: string) => void
+    todoListId: string
 }
 
-export const AddTask: FC<PropsTypeAddTask> = ({ addTask }) => {
+export const AddTask: FC<PropsTypeAddTask> = ({ addTask, todoListId }) => {
 
     const [valueInput, setValueInput] = useState<string>('');
     const [errorClass, setErrorClass] = useState<boolean>(false)
 
     const eventAddTask = () => {
-        addTask(valueInput.trim())
+        addTask(todoListId, valueInput.trim())
         setValueInput('')
     }
 
@@ -20,9 +21,7 @@ export const AddTask: FC<PropsTypeAddTask> = ({ addTask }) => {
         setValueInput(e.currentTarget.value)
     }
 
-    const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        console.log(valueInput.length);
-        
+    const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {        
         e.key === 'Enter' && valueInput.trim().length && eventAddTask()
         errorClassName()
     }

@@ -3,21 +3,22 @@ import { Button } from './Button';
 import { filteredTasksType } from '../Todolist';
 
 type TodoListButtonGroupPropsType = {
-    changeFilterTasks: (filteredTasks: filteredTasksType) => void
-    filteredTasks: string
+    todoListId: string
+    filteredTasks: filteredTasksType
+    changeFilterTasks: (todoListId: string, filteredTasks: filteredTasksType) => void
 }
 
-export const TodoListButtonGroup: FC<TodoListButtonGroupPropsType> = ({changeFilterTasks, filteredTasks}) => {
+export const TodoListButtonGroup: FC<TodoListButtonGroupPropsType> = ({todoListId, changeFilterTasks, filteredTasks}) => {
 
-    const changeFilterHandlerCreator = (filter: filteredTasksType) => {
-        return () => changeFilterTasks(filter)
+    const changeFilterHandlerCreator = (todoListId: string, filter: filteredTasksType) => {
+        return () => changeFilterTasks(todoListId, filter)
     }
     
     return (
         <div>
-            <Button className={filteredTasks === 'All' ? '__active' : ''} onClick={changeFilterHandlerCreator('All')} title='All' />
-            <Button className={filteredTasks === 'Active' ? '__active' : ''} onClick={changeFilterHandlerCreator('Active')} title='Active' />
-            <Button className={filteredTasks === 'Completed' ? '__active' : ''} onClick={changeFilterHandlerCreator('Completed')} title='Completed' />
+            <Button className={filteredTasks === 'All' ? '__active' : ''} onClick={changeFilterHandlerCreator(todoListId, 'All')} title='All' />
+            <Button className={filteredTasks === 'Active' ? '__active' : ''} onClick={changeFilterHandlerCreator(todoListId, 'Active')} title='Active' />
+            <Button className={filteredTasks === 'Completed' ? '__active' : ''} onClick={changeFilterHandlerCreator(todoListId, 'Completed')} title='Completed' />
         </div>
     );
 };
