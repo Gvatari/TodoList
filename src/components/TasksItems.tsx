@@ -12,7 +12,7 @@ type PropsTypeTasksItems = {
 }
 
 export const TasksItems: FC<PropsTypeTasksItems> = ({ todoListId, tasks, removeTask, changeTaskStatus, filteredTasks }) => {
-    
+
     const removeTaskHandler = (id: string) => () => removeTask(todoListId, id)
 
     const changeTaskStatusHandler = (todoListId: string, id: string, e: ChangeEvent<HTMLInputElement>) => {
@@ -31,30 +31,21 @@ export const TasksItems: FC<PropsTypeTasksItems> = ({ todoListId, tasks, removeT
                 return allTasks
         }
     }
-    
-    let tasksForTodolist = filterTasks(tasks, filteredTasks);
 
-    const tasksMap = () => {
-        return (
-            tasksForTodolist.map(t => {
-         
-                return (
-                    <li key={t.id}>
-                        <input id={v1()} type="checkbox" onChange={(e) => changeTaskStatusHandler(todoListId, t.id, e)} checked={t.isDone} />
-                        <span>{t.name}</span>
-                        <Button onClick={removeTaskHandler(t.id)} title={'x'} />
-                    </li>
-                )
-            })
-        )
-    }
+    let tasksForTodolist = filterTasks(tasks, filteredTasks);
 
     return (
         <>
             {
                 tasks.length ?
                     <ul>
-                        {tasksMap()}
+                        {tasksForTodolist.map(t => {
+                            return <li key={t.id}>
+                                <input id={v1()} type="checkbox" onChange={(e) => changeTaskStatusHandler(todoListId, t.id, e)} checked={t.isDone} />
+                                <span>{t.name}</span>
+                                <Button onClick={removeTaskHandler(t.id)} title={'x'} />
+                            </li>
+                        })}
                     </ul> :
                     <span>Task list is empty</span>
             }

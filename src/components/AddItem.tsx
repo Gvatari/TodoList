@@ -2,18 +2,17 @@ import { ChangeEvent, KeyboardEvent, FC, useState } from 'react';
 import { Button } from './Button';
 import { v1 } from 'uuid';
 
-type PropsTypeAddTask = {
-    addTask: (todoListId: string, valueInput: string) => void
-    todoListId: string
+type AddItemProps = {
+    addItem: (valueInput: string) => void
 }
 
-export const AddTask: FC<PropsTypeAddTask> = ({ addTask, todoListId }) => {
+export const AddItem: FC<AddItemProps> = ({ addItem }) => {
 
     const [valueInput, setValueInput] = useState<string>('');
     const [errorClass, setErrorClass] = useState<boolean>(false)
 
     const eventAddTask = () => {
-        addTask(todoListId, valueInput.trim())
+        addItem(valueInput.trim())
         setValueInput('')
     }
 

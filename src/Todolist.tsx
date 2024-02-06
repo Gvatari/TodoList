@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { TasksItems } from "./components/TasksItems";
 import { Title } from "./components/Title";
-import { AddTask } from "./components/AddTask";
+import { AddItem } from "./components/AddItem";
 import { TodoListButtonGroup } from "./components/TodoListButtonGroup";
 import { Button } from "./components/Button";
 
@@ -54,6 +54,10 @@ export const Todolist: FC<PropsTypeTodolist> = (
        removeTodoList(todoListId)
     }
 
+    const addTaskWrapper = (valueInput: string) => {
+        addTask(todoListId, valueInput);
+    }
+
     return (
         <div className='todoList'>
             <Button onClick={onClickHandlerRemoveTodoList} title="x" />
@@ -61,7 +65,7 @@ export const Todolist: FC<PropsTypeTodolist> = (
             <Button onClick={onClickHandlerToggleTodoList} title={`${hideTodoList ? 'Показать' : 'Скрыть'}`} />
             {hideTodoList ? <span>...</span> :
                 <>
-                    <AddTask todoListId={todoListId} addTask={addTask} />
+                    <AddItem addItem={addTaskWrapper} />
                     <TasksItems todoListId={todoListId} changeTaskStatus={changeTaskStatus} removeTask={removeTask} filteredTasks={filteredTasks} tasks={tasks} />
                     <TodoListButtonGroup todoListId={todoListId} filteredTasks={filteredTasks} changeFilterTasks={changeFilterTasks} />
                 </>
