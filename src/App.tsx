@@ -44,8 +44,8 @@ const App = () => {
     })
 
     let [todoLists, setTodoList] = useState<Array<TodoListsType>>([
-        { id: todoList1, title: 'What to learn', filter: 'Active' },
-        { id: todoList2, title: 'What to buy', filter: 'Completed' }
+        { id: todoList1, title: 'What to learn', filter: 'All' },
+        { id: todoList2, title: 'What to buy', filter: 'All' }
     ])
 
     const removeTodoList = (todoListId: string) => {
@@ -56,6 +56,14 @@ const App = () => {
         let newTodoList:TodoListsType = {id: v1(), title: valueInput, filter: 'All'}
         setTodoList([newTodoList, ...todoLists])
         setTasks({...tasks, [newTodoList.id]:[]})
+    }
+
+    const changeTodoTitle = (todoListId: string, title: string) => {
+        setTodoList(todoLists.map(t => t.id === todoListId ? {...t, title} : t))
+    }
+
+    const changeTaskName = (todoListId: string, taskId: string, name: string) => {
+        setTasks({...tasks, [todoListId]: tasks[todoListId].map(t => t.id === taskId ? {...t, name} : t)})
     }
 
     return (
@@ -74,6 +82,8 @@ const App = () => {
                         changeTaskStatus={changeTaskStatus}
                         filteredTasks={tl.filter}
                         removeTodoList={removeTodoList}
+                        changeTodoTitle={changeTodoTitle}
+                        changeTaskName={changeTaskName}
                     />
                 })
             }

@@ -29,6 +29,8 @@ type PropsTypeTodolist = {
     changeTaskStatus: (todoListId: string, id: string, isDone: boolean) => void
     filteredTasks: filteredTasksType
     removeTodoList: (todoListId: string) => void
+    changeTodoTitle: (todoListId: string, title: string) => void
+    changeTaskName: (todoListId: string, taskId: string, name: string) => void
 }
 
 export const Todolist: FC<PropsTypeTodolist> = (
@@ -41,8 +43,10 @@ export const Todolist: FC<PropsTypeTodolist> = (
         changeFilterTasks,
         changeTaskStatus,
         filteredTasks,
-        removeTodoList
-     }) => {
+        removeTodoList,
+        changeTodoTitle,
+        changeTaskName
+    }) => {
 
     const [hideTodoList, setHideTodoList] = useState<boolean>(false)
 
@@ -50,23 +54,27 @@ export const Todolist: FC<PropsTypeTodolist> = (
 
     const onClickHandlerToggleTodoList = () => toggleTodoList(hideTodoList)
 
-    const onClickHandlerRemoveTodoList = () => {        
-       removeTodoList(todoListId)
+    const onClickHandlerRemoveTodoList = () => {
+        removeTodoList(todoListId)
     }
 
     const addTaskWrapper = (valueInput: string) => {
         addTask(todoListId, valueInput);
     }
 
+    const changeValueInput = (title: string) => {
+        changeTodoTitle(todoListId, title)
+    }
+
     return (
         <div className='todoList'>
             <Button onClick={onClickHandlerRemoveTodoList} title="x" />
-            <Title title={title} />
+            <Title title={title} changeValueInput={changeValueInput} />
             <Button onClick={onClickHandlerToggleTodoList} title={`${hideTodoList ? 'Показать' : 'Скрыть'}`} />
             {hideTodoList ? <span>...</span> :
                 <>
                     <AddItem addItem={addTaskWrapper} />
-                    <TasksItems todoListId={todoListId} changeTaskStatus={changeTaskStatus} removeTask={removeTask} filteredTasks={filteredTasks} tasks={tasks} />
+                    <TasksItems todoListId={todoListId} changeTaskName={changeTaskName} changeTaskStatus={changeTaskStatus} removeTask={removeTask} filteredTasks={filteredTasks} tasks={tasks} />
                     <TodoListButtonGroup todoListId={todoListId} filteredTasks={filteredTasks} changeFilterTasks={changeFilterTasks} />
                 </>
             }
