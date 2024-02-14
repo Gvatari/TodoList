@@ -1,3 +1,4 @@
+import TextField from '@mui/material/TextField';
 import { ChangeEvent, FC, useState } from 'react';
 
 type PropsTypeTitle = {
@@ -26,8 +27,8 @@ export const Title: FC<PropsTypeTitle> = ({ title, changeValueInput }) => {
         <h3>
             {
                 !editingTitle ?
-                    <span onDoubleClick={changedTitle}>{title}</span> :
-                    <input autoFocus onBlur={onBlueHandler} onChange={onChangeHandler} type="text" value={valueInput} />
+                    <span style={{color: '#a3a1a1'}} onDoubleClick={changedTitle}>{title}</span> :
+                    <TextField autoFocus onBlur={onBlueHandler} onChange={onChangeHandler} value={valueInput} variant="outlined" size='small' />
             }
 
         </h3>

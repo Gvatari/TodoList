@@ -3,35 +3,5 @@
 }
 
 .App {
-  padding: 30px;
-  display: flex;
-}
-
-.App > div {
-  margin-right: 50px;
-}
-
-.todoList {
-  border: 1px solid lightgreen;
-  padding: 20px;
-  background-color: rgba(115, 207, 220, 0.73);
-  border-radius: 6px;
-}
-
-.add-task-input {
-  outline: none;
-  border: 1px solid transparent;
-  border-radius: 3px;
-}
-  
-.error {
-  border: 2px solid red;
-}
-
-.error-message {
-  color: red;
-}
-
-.__active {
-  background-color: #f6f2e2b7;
+ 
 }

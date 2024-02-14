@@ -1,6 +1,8 @@
 import { ChangeEvent, KeyboardEvent, FC, useState } from 'react';
-import { Button } from './Button';
+// import { Button } from './Button';
 import { v1 } from 'uuid';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 type AddItemProps = {
     addItem: (valueInput: string) => void
@@ -33,21 +35,32 @@ export const AddItem: FC<AddItemProps> = ({ addItem }) => {
         valueInput.trim().length === 0 ? setErrorClass(true) : setErrorClass(false)   
     }
 
+    const styles = {
+        maxWidth: '40px',
+        maxHeight: '40px',
+        minWidth: '40px',
+        minHeight: '40px',
+    }
+
     return (
         <div>
-            <input
-                className={`add-task-input ${errorClass ? 'error' : ''}`}
+            <TextField
+                error={!!errorClass}
+                size="small"
+                label={!errorClass ? 'Напишите...' : 'Не должно быть пусто...'}
+                variant="outlined"
                 id={v1()}
                 onKeyUp={onKeyDownHandler}
                 value={valueInput}
                 onChange={onChangeHandlerInput}
             />
             <Button
+                sx={styles}
+                size="small"
+                variant="contained"
                 onClick={onClickHandler}
-                title='+'
-                isDisabled={!valueInput.trim()}
-            />
-            {errorClass ? <div style={{ color: 'red' }}>Строка не должна быть пустой</div> : null}
+                disabled={!valueInput.trim()}
+            >+</Button>
         </div>
     );
 };

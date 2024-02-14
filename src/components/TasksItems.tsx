@@ -1,9 +1,10 @@
 import { ChangeEvent, FC } from 'react';
 import { TasksType, filteredTasksType } from '../Todolist';
-import { Button } from './Button';
 import { v1 } from 'uuid';
 import { Title } from './Title';
 import s from './TaskItems.module.css'
+import { Checkbox, IconButton } from '@mui/material';
+import { Delete } from '@mui/icons-material';
 
 type PropsTypeTasksItems = {
     todoListId: string
@@ -47,14 +48,16 @@ export const TasksItems: FC<PropsTypeTasksItems> = ({ todoListId, tasks, removeT
                 tasks.length ?
                     <ul>
                         {tasksForTodolist.map(t => {
-                            return <li key={t.id} className={s.taskBlock}>
-                                <input id={v1()} type="checkbox" onChange={(e) => changeTaskStatusHandler(todoListId, t.id, e)} checked={t.isDone} />
+                            return <li key={t.id} className={`${s.taskBlock} ${t.isDone ? s.complited : ''}`}>
+                                <Checkbox id={v1()} checked={t.isDone} onChange={(e) => changeTaskStatusHandler(todoListId, t.id, e)} color="secondary" />
                                 <Title title={t.name} changeValueInput={(name: string) => changeValueInputHandler(t.id, name)} />
-                                <Button onClick={removeTaskHandler(t.id)} title={'x'} />
+                                <IconButton onClick={removeTaskHandler(t.id)} aria-label="delete">
+                                    <Delete />
+                                </IconButton>
                             </li>
                         })}
                     </ul> :
-                    <span>Task list is empty</span>
+                    <div style={{padding: '10px'}}>Task list is empty</div>
             }
         </>
     );

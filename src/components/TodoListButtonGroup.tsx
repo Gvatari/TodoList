@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { Button } from './Button';
+// import { Button } from './Button';
 import { filteredTasksType } from '../Todolist';
+import Button from '@mui/material/Button';
 
 type TodoListButtonGroupPropsType = {
     todoListId: string
@@ -16,9 +17,9 @@ export const TodoListButtonGroup: FC<TodoListButtonGroupPropsType> = ({todoListI
     
     return (
         <div>
-            <Button className={filteredTasks === 'All' ? '__active' : ''} onClick={changeFilterHandlerCreator(todoListId, 'All')} title='All' />
-            <Button className={filteredTasks === 'Active' ? '__active' : ''} onClick={changeFilterHandlerCreator(todoListId, 'Active')} title='Active' />
-            <Button className={filteredTasks === 'Completed' ? '__active' : ''} onClick={changeFilterHandlerCreator(todoListId, 'Completed')} title='Completed' />
+            <Button onClick={changeFilterHandlerCreator(todoListId, 'All')} variant={filteredTasks === 'All' ? 'outlined' : 'text'}>All</Button>
+            <Button onClick={changeFilterHandlerCreator(todoListId, 'Active')} variant={filteredTasks === 'Active' ? 'outlined' : 'text'}>Active</Button>
+            <Button onClick={changeFilterHandlerCreator(todoListId, 'Completed')} variant={filteredTasks === 'Completed' ? 'outlined' : 'text'}>Completed</Button>
         </div>
     );
 };

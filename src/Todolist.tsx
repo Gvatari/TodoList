@@ -3,7 +3,9 @@ import { TasksItems } from "./components/TasksItems";
 import { Title } from "./components/Title";
 import { AddItem } from "./components/AddItem";
 import { TodoListButtonGroup } from "./components/TodoListButtonGroup";
-import { Button } from "./components/Button";
+// import { Button } from "./components/Button";
+import { Delete } from "@mui/icons-material";
+import { Button, IconButton } from "@mui/material";
 
 export type filteredTasksType = 'All' | 'Active' | 'Completed'
 
@@ -68,10 +70,12 @@ export const Todolist: FC<PropsTypeTodolist> = (
 
     return (
         <div className='todoList'>
-            <Button onClick={onClickHandlerRemoveTodoList} title="x" />
+            <IconButton onClick={onClickHandlerRemoveTodoList} aria-label="delete">
+                <Delete />
+            </IconButton>
             <Title title={title} changeValueInput={changeValueInput} />
-            <Button onClick={onClickHandlerToggleTodoList} title={`${hideTodoList ? 'Показать' : 'Скрыть'}`} />
-            {hideTodoList ? <span>...</span> :
+            <Button style={{marginBottom: '10px'}} onClick={onClickHandlerToggleTodoList} variant="outlined" size="small">{hideTodoList ? 'Показать' : 'Скрыть'}</Button>
+            {hideTodoList ? <span></span> :
                 <>
                     <AddItem addItem={addTaskWrapper} />
                     <TasksItems todoListId={todoListId} changeTaskName={changeTaskName} changeTaskStatus={changeTaskStatus} removeTask={removeTask} filteredTasks={filteredTasks} tasks={tasks} />
